@@ -1,0 +1,31 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "A Sample Todo-List app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajeetraina/todolist.git"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "Ajeet Singh Raina",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ajeetraina/todolist/issues"
+  },
+  "homepage": "https://github.com/ajeetraina/todolist#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "redis": "^4.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
