@@ -4,6 +4,11 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
   annotations:
+    # use cert-manager.io/cluster-issuer if your issuer is on cluster-wide 
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    # use cert-manager.io/issuer if you use issuer in specific environment
+    #cert-manager.io/issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     # If you encounter a redirect loop or are getting a 307 response code
@@ -22,3 +27,7 @@ spec:
             name: argocd-server
             port:
               name: https
+  tls:
+  - hosts:
+    - argocd.devops-warrior.site
+    secretName: argocd-secret # do not change, this is provided by Argo CD

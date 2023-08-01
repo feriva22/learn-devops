@@ -13,7 +13,7 @@ For installing argocd with default config, we can use tutorial from [this link](
 sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 rm argocd-linux-amd64`
 
-## 3. Access ArgoCD API Server
+### 3. Access ArgoCD API Server
 For access ArgoCD API you have some options, for default when first deployment we not expose service to Host port
 this is options for access ArgoCD API Server\
 a. Change Service Type `LoadBalancer`\
@@ -28,3 +28,22 @@ This is easy method for exposing argocd service to Host deployed argocd inside c
 `kubectl port-forward svc/argocd-server -n argocd 8080:443`\
 After you success execute that command then access service at `https://localhost:8080`\
 
+### 4. Get Password for login in argocd
+Execute this command to login as admin and get password
+`argocd admin initial-password -n argocd`
+
+### 5. Login to Argocd CLI for used it
+`argocd login <ARGOCD_SERVER>`\
+ARGOCD_SERVER is location of service argocd-server port forwarded
+
+## Start Deploying app
+We can use this example guestbook application to deploy in Argocd\
+`argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace default`\
+
+Then we can check it from ArgoCD UI for check if application succesfully deployed 
+
+## Check with Temporary pod, without change service Type to LoadBalancer or NodePort
+`kubectl run temp-pod --rm -it --image=busybox --restart=Never -- sh`\
+Then check with use `wget` command
+`wget --no-check-certificate -O - http://guestbook-ui`
+ 
